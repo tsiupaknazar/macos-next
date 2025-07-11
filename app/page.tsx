@@ -9,6 +9,7 @@ import Desktop from "@/components/screens/Desktop";
 
 export default function Home() {
   const status = useSystemStore((s) => s.status);
+  // const status = "desktop"
   // const progress = useSystemStore((s) => s.loadingProgress);
   const updateProgress = useSystemStore((s) => s.updateProgress);
   const showLogin = useSystemStore((s) => s.showLogin);
@@ -33,6 +34,7 @@ export default function Home() {
       {status === "booting" && <LoadingScreen />}
       {status === "login" && <LoginScreen />}
       {status === "desktop" && <Desktop />}
+      {status === "lock" && <LoginScreen />}
     </>
 
   );
