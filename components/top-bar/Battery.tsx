@@ -1,33 +1,34 @@
-import { BatteryCharging, BatteryFull } from "lucide-react";
+import { BatteryService } from "@/lib/services/BatteryService";
+import { BatteryCharging, BatteryFull, BatteryLow, BatteryMedium } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
-type BatteryManager = {
-    charging: boolean;
-    chargingTime: number;
-    dischargingTime: number;
-    level: number;
-    onchargingchange: ((this: BatteryManager, ev: Event) => void) | null;
-    onchargingtimechange: ((this: BatteryManager, ev: Event) => void) | null;
-    ondischargingtimechange: ((this: BatteryManager, ev: Event) => void) | null;
-    onlevelchange: ((this: BatteryManager, ev: Event) => void) | null;
-};
+const battery = new BatteryService();
 
-export default function Battery() {
-    const [batteryInfo, setBatteryInfo] = useState<BatteryManager | null>(null);
+export function Battery() {
+    const [level, setLevel] = useState(1);
+    const [charging, setCharging] = useState(true);
 
     useEffect(() => {
-        if ("getBattery" in navigator) {
-            (navigator as any).getBattery().then((battery: BatteryManager) => {
-                setBatteryInfo(battery);
-                console.log(battery);
-            });
-        }
-    }, [batteryInfo]);
+        const unsubscribe = battery.subscribe(({ level, charging }) => {
+            setLevel(level);
+            setCharging(charging);
+            console.log("Battery level:", level, "Charging:", charging);
+        });
+
+        return () => unsubscribe();
+    }, []);
 
     return (
         <div>
-            {batteryInfo?.charging ? <BatteryCharging size={24} strokeWidth={3} /> : <BatteryFull size={24} strokeWidth={3} />}
-            {/* {batteryInfo ? `Battery level: ${Math.round(batteryInfo.level * 100)}%` : batteryInfo <BatteryFull  size={24} strokeWidth={3}/>} */}
+            {charging ? (
+                <BatteryCharging size={24} strokeWidth={3} />
+            ) : level < 0.2 ? (
+                <BatteryLow size={24} strokeWidth={3} />
+            ) : level < 0.5 ? (
+                <BatteryMedium size={24} strokeWidth={3} />
+            ) : (
+                <BatteryFull size={24} strokeWidth={3} />
+            )}
         </div>
     );
 }

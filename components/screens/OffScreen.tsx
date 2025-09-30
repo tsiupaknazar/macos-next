@@ -5,6 +5,8 @@ import { Power } from "lucide-react"
 export default function OffScreen() {
     const turnOn = useSystemStore((s) => s.turnOn);
 
+    console.log(document.fullscreenElement)
+
     return (
         <ScreenWrapper>
             <div className="bg-black w-full h-full flex items-center justify-center">

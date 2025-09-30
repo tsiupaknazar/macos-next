@@ -1,10 +1,11 @@
 "use client";
 import { useState } from "react";
 import { format } from "date-fns";
-import {Search, Wifi } from "lucide-react";
+import { Search, Wifi } from "lucide-react";
 import { useSystemStore } from "@/store/systemStore";
 
-import Battery from "@/components/top-bar/Battery"
+import { Battery } from "@/components/top-bar/Battery"
+import { useWindowStore } from "@/store/windowStore";
 
 export default function TopBar() {
     const sleep = useSystemStore((s) => s.sleep);
@@ -12,6 +13,7 @@ export default function TopBar() {
     const shutdown = useSystemStore((s) => s.shutdown);
     const turnOff = useSystemStore((s) => s.turnOff);
 
+    const activeWindow = useWindowStore((s) => s.activeWindow());
 
     const [showAppleMenu, setShowAppleMenu] = useState(false);
     const time = format(new Date(), "HH:mm");
@@ -42,7 +44,7 @@ export default function TopBar() {
 
             {/* Active App & Menus */}
             <div className="flex items-center gap-1 ml-2">
-                <span className="cursor-default hover:bg-gray-500 hover:rounded-lg py-0.5 px-3 font-black">Active App</span>
+                <span className="cursor-default hover:bg-gray-500 hover:rounded-lg py-0.5 px-3 font-black">{activeWindow?.appId || "Finder"}</span>
                 <span className="cursor-default hover:bg-gray-500 hover:rounded-lg py-0.5 px-3">File</span>
                 <span className="cursor-default hover:bg-gray-500 hover:rounded-lg py-0.5 px-3">Edit</span>
                 <span className="cursor-default hover:bg-gray-500 hover:rounded-lg py-0.5 px-3">View</span>
@@ -54,7 +56,7 @@ export default function TopBar() {
             <div className="flex-1" />
 
             {/* Clock / Status */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 font-medium">
                 <Wifi size={24} strokeWidth={3} />
                 <Battery />
                 <Search size={18} strokeWidth={2} />
