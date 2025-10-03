@@ -12,15 +12,15 @@ export class BatteryService {
 
     constructor() {
         if ("getBattery" in navigator) {
-            navigator.getBattery().then((battery) => {
-                this.data = { level: battery.level, charging: battery.charging };
-                battery.addEventListener("levelchange", () => {
-                    this.update({ level: battery.level });
-                });
-                battery.addEventListener("chargingchange", () => {
-                    this.update({ charging: battery.charging });
-                });
-            });
+            // navigator.getBattery().then((battery) => {
+            //     this.data = { level: battery.level, charging: battery.charging };
+            //     battery.addEventListener("levelchange", () => {
+            //         this.update({ level: battery.level });
+            //     });
+            //     battery.addEventListener("chargingchange", () => {
+            //         this.update({ charging: battery.charging });
+            //     });
+            // });
         } else {
             this.simulate();
         }

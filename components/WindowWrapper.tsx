@@ -49,15 +49,14 @@ export default function WindowWrapper(props: WindowData) {
                     position,
                 });
             }}
-            className={`rounded-md bg-white border cursor-default border-gray-300 shadow-xl overflow-hidden absolute transition-all duration-150 ${isActive ? "z-50" : "z-40 opacity-80"
-                }`}
+            className={`rounded-md bg-white border cursor-default border-gray-300 shadow-xl overflow-hidden absolute transition-all duration-150 ${isFullScreen && "z-[100]"} ${isActive ? "z-50" : "z-40 opacity-80"}`}
         >
             {/* Header */}
-            <div className="flex justify-between items-center px-3 py-2 bg-gray-100">
+            <div className="flex justify-between items-center px-3 py-2 bg-gray-100 z-50">
                 <div className="flex gap-2">
                     <button
                         onClick={() => close(id)}
-                        className="w-3 h-3 bg-red-500 rounded-full"
+                        className="w-3 h-3 bg-red-500 rounded-full hover:text-black cursor-pointer"
                     />
                     <button
                         onClick={() => minimize(id)}
@@ -73,7 +72,7 @@ export default function WindowWrapper(props: WindowData) {
             </div>
 
             {/* Content */}
-            <div className="p-4 text-sm text-gray-500">
+            <div className="text-sm text-gray-500">
                 {AppComponent ? <AppComponent /> : `Порожнє вікно: ${appId}`}
             </div>
         </Rnd>

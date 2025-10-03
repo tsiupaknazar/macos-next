@@ -11,6 +11,7 @@ export type WindowData = {
     isFullScreen: boolean;
     position: { x: number; y: number };
     size: { width: number; height: number };
+    fixedSize?: boolean; // new
 };
 
 type WindowState = {
@@ -29,6 +30,7 @@ export const useWindowStore = create<WindowState>((set, get) => ({
     activeWindow: () => get().windows.find((w) => w.isActive),
     openWindow: (appId) =>
         set((state) => {
+            const isFixed = appId === "settings"; //new
             const newWindow: WindowData = {
                 id: crypto.randomUUID(),
                 appId,
@@ -36,7 +38,8 @@ export const useWindowStore = create<WindowState>((set, get) => ({
                 isMinimized: false,
                 isFullScreen: false,
                 position: { x: 100, y: 100 },
-                size: { width: 600, height: 400 },
+                size: isFixed? { width: 892, height: 600 } : { width: 600, height: 400 }, // new
+                fixedSize: isFixed, // new
             };
             return {
                 windows: [

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { format } from "date-fns";
-import { Search, Wifi } from "lucide-react";
+import { Search, Wifi, Languages } from "lucide-react";
 import { useSystemStore } from "@/store/systemStore";
 
 import { Battery } from "@/components/top-bar/Battery"
@@ -20,7 +20,7 @@ export default function TopBar() {
     const date = format(new Date(), "d MMM")
 
     return (
-        <div className="absolute top-0 left-0 w-full h-7 bg-black/30 text-white flex items-center px-4 text-sm backdrop-blur z-50">
+        <div className="absolute top-0 left-0 w-full h-7 bg-black/30 text-white flex items-center px-4 text-sm backdrop-blur z-[60]">
             {/*  Apple Menu */}
             <div className="relative">
                 <button onClick={() => setShowAppleMenu(!showAppleMenu)} className="px-1 font-black text-xl">
@@ -58,6 +58,7 @@ export default function TopBar() {
             {/* Clock / Status */}
             <div className="flex items-center gap-2 font-medium">
                 <Wifi size={24} strokeWidth={3} />
+                <Languages />
                 <Battery />
                 <Search size={18} strokeWidth={2} />
                 <span>{date}</span>
