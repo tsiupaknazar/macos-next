@@ -21,7 +21,6 @@ export default function TopBar() {
 
     return (
         <div className="absolute top-0 left-0 w-full h-7 bg-black/30 text-white flex items-center px-4 text-sm backdrop-blur z-[60]">
-            {/*  Apple Menu */}
             <div className="relative">
                 <button onClick={() => setShowAppleMenu(!showAppleMenu)} className="px-1 font-black text-xl">
                     
@@ -42,7 +41,7 @@ export default function TopBar() {
                 )}
             </div>
 
-            {/* Active App & Menus */}
+
             <div className="flex items-center gap-1 ml-2">
                 <span className="cursor-default hover:bg-gray-500 hover:rounded-lg py-0.5 px-3 font-black">{activeWindow?.appId || "Finder"}</span>
                 <span className="cursor-default hover:bg-gray-500 hover:rounded-lg py-0.5 px-3">File</span>
@@ -52,17 +51,18 @@ export default function TopBar() {
                 <span className="cursor-default hover:bg-gray-500 hover:rounded-lg py-0.5 px-3">Help</span>
             </div>
 
-            {/* Spacer */}
             <div className="flex-1" />
 
-            {/* Clock / Status */}
             <div className="flex items-center gap-2 font-medium">
                 <Wifi size={24} strokeWidth={3} />
                 <Languages />
                 <Battery />
                 <Search size={18} strokeWidth={2} />
-                <span>{date}</span>
-                <span>{time}</span>
+                {/* font SF PRO*/}
+                <div className="flex items-center justify-center text-sm font-medium text-center text-white leading-[123%] gap-2">
+                    <span>{date}</span>
+                    <span>{time}</span>
+                </div>
             </div>
         </div>
     );

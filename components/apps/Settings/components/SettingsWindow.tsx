@@ -1,85 +1,109 @@
-'use client';
-import { SunMoon, Wallpaper, Bell, Eye } from "lucide-react"
+"use client"
 
-import {
-    Sidebar,
-    SidebarContent,
-    SidebarGroup,
-    SidebarGroupContent,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
-} from "@/components/ui/sidebar";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import WallpaperTab from "./tabs/WallpaperTab";
-
+import { useState } from "react"
+import { Wallpaper, Bell, Eye } from "lucide-react"
+import { cn } from "@/lib/utils"
+// import ThemeTab from "./tabs/ThemeTab"
+import WallpaperTab from "./tabs/WallpaperTab"
+import AppearanceTab from "./tabs/AppearanceTab"
+import { useAppearanceStore } from "@/store/appearanceStore"
 
 const items = [
-    {
-        title: "Theme",
-        icon: SunMoon,
-    },
-    {
-        title: "Wallpaper",
-        icon: Wallpaper,
-    },
-    {
-        title: "Notifications",
-        icon: Bell,
-    },
-    {
-        title: "Appearance",
-        icon: Eye,
-    },
+    // { title: "Theme", icon: SunMoon },
+    { title: "Wallpaper", icon: Wallpaper },
+    { title: "Notifications", icon: Bell },
+    { title: "Appearance", icon: Eye },
 ]
+
+const iconSizeMap = {
+    small: "h-4 w-4",
+    medium: "h-5 w-5",
+    large: "h-6 w-6",
+}
 
 
 export default function SettingsWindow() {
+    const [activeTab, setActiveTab] = useState(items[0].title)
+
+    const { accentColor, isDark, sidebarIconSize } = useAppearanceStore();
+
+    const renderContent = () => {
+        switch (activeTab) {
+            case "Appearance":
+                return <AppearanceTab />
+            case "Wallpaper":
+                return <WallpaperTab />
+            case "Notifications":
+                return <div>Notifications Content</div>
+            default:
+                return null
+        }
+    }
+
     return (
-            <Tabs defaultValue="Theme" className="w-full">
-                <Sidebar className="w-40 h-full top-8">
-                    <SidebarContent>
-                        <SidebarGroup>
-                            <SidebarGroupContent>
-                                <SidebarMenu>
-                                    <TabsList className="flex flex-col items-start justify-center border border-red-950 space-y-1 mt-20 mb-5">
-                                        <div className="flex items-center mb-2">
-                                            <div className="bg-yellow-600 w-8 h-8 rounded-4xl"></div>
-                                            <div className="flex flex-col ml-2">
-                                                <h2 className="font-bold">User Name</h2>
-                                                <p className="text-xs opacity-70">Apple Account</p>
-                                            </div>
-                                        </div>
-                                        {items.map((item) => (
-                                            <SidebarMenuItem key={item.title}>
-                                                <SidebarMenuButton asChild>
-                                                    <TabsTrigger value={item.title}>
-                                                        <item.icon />
-                                                        <span>{item.title}</span>
-                                                    </TabsTrigger>
-                                                </SidebarMenuButton>
-                                            </SidebarMenuItem>
-                                        ))}
-                                    </TabsList>
-                                </SidebarMenu>
-                            </SidebarGroupContent>
-                        </SidebarGroup>
-                    </SidebarContent>
-                </Sidebar>
-                <div className="w-[calc(100%-10rem)] min-h-full ml-40 z-50">
-                    <TabsContent value="Theme" className="p-4">
-                        Theme Settings
-                    </TabsContent>
-                    <TabsContent value="Wallpaper" className="p-4">
-                        <WallpaperTab />
-                    </TabsContent>
-                    <TabsContent value="Notifications" className="p-4">
-                        Notifications Settings
-                    </TabsContent>
-                    <TabsContent value="Appearance" className="p-4">
-                        Appearance Settings
-                    </TabsContent>
+        <div
+            className={cn(
+                "flex h-full min-h-screen transition-colors duration-300",
+                isDark ? "bg-neutral-900 text-gray-100" : "bg-gray-50 text-gray-900"
+            )}>
+            <aside
+                className={cn(
+                    "w-40 border-r transition-all duration-300 backdrop-blur-md",
+                    isDark
+                        ? "border-neutral-700 bg-neutral-900/60"
+                        : "border-gray-200 bg-white/70"
+                )}
+                style={{
+                    boxShadow: isDark
+                        ? "inset -1px 0 0 rgba(255,255,255,0.05)"
+                        : "inset -1px 0 0 rgba(0,0,0,0.05)",
+                }}
+            >
+                <div className="flex flex-col h-full">
+                    <div className="flex items-center mt-6 mb-3 px-4">
+                        <div className="bg-yellow-600 w-8 h-8 rounded-4xl"></div>
+                        <div className="flex flex-col ml-2">
+                            <h2 className="font-bold">User Name</h2>
+                            <p className={cn("text-xs", isDark ? "opacity-60" : "opacity-70")}>Apple Account</p>
+                        </div>
+                    </div>
+
+                    <nav className="flex-1 flex flex-col space-y-1 px-2">
+                        {items.map((item) => {
+                            const Icon = item.icon
+                            const isActive = activeTab === item.title
+                            return (
+                                <button
+                                    key={item.title}
+                                    onClick={() => setActiveTab(item.title)}
+                                    className={cn(
+                                        "flex w-full items-center gap-2 rounded-sm px-3 py-2 text-sm font-medium transition-colors",
+                                        isActive
+                                            ? "text-white"
+                                            : "text-gray-700 dark:text-white hover:bg-gray-200"
+                                    )}
+                                    style={{
+                                        backgroundColor: isActive ? accentColor : "transparent",
+                                    }}
+                                >
+                                    <Icon className={cn(iconSizeMap[sidebarIconSize])} />
+                                    <span>{item.title}</span>
+                                </button>
+                            )
+                        })}
+                    </nav>
                 </div>
-            </Tabs>
-    );
+            </aside>
+
+            {/* Main Content */}
+            <main
+                className={cn(
+                    "flex-1 overflow-auto transition-colors duration-300",
+                    isDark ? "bg-neutral-950/40" : "bg-white/70"
+                )}
+            >
+                {renderContent()}
+            </main>
+        </div>
+    )
 }

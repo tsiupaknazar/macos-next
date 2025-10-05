@@ -2,19 +2,36 @@ import Image from "next/image";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { appLibrary } from "@/data/appLibrary";
 import { AppId, useWindowStore } from "@/store/windowStore";
+import { useAppearanceStore } from "@/store/appearanceStore";
 
 export default function Dock() {
     const windows = useWindowStore((s) => s.windows);
     const openApp = useWindowStore((s) => s.openWindow);
+    const { dockSize } = useAppearanceStore();
 
     const isAppActive = (appId: string) =>
         windows.some((w) => w.appId === appId && !w.isMinimized);
     const isFocused = (appId: string) =>
         windows.some((w) => w.appId === appId && w.isActive);
 
+    const iconSize = dockSize; // direct mapping (e.g. 48–128)
+    const dockHeight = iconSize + 24; // background height based on icon size
+    const dockPaddingX = Math.max(iconSize * 0.25, 12);
+    const dockPaddingY = Math.max(iconSize * 0.15, 8);
+    const borderRadius = Math.max(iconSize * 0.35, 12);
+    const gap = Math.max(iconSize * 0.25, 12);
+
     return (
         <div className="absolute bottom-6 w-full flex justify-center pointer-events-none z-50">
-            <div className="bg-white/20 backdrop-blur-md rounded-2xl shadow-xl px-4 py-2 flex gap-4 pointer-events-auto border border-white/30">
+            <div
+                className="dark:bg-white/20 bg-white/70 backdrop-blur-md rounded-2xl shadow-xl px-4 py-2 flex gap-4 pointer-events-auto border border-white/30"
+                style={{
+                    height: dockHeight,
+                    padding: `${dockPaddingY}px ${dockPaddingX}px`,
+                    borderRadius: borderRadius,
+                    gap: gap,
+                }}
+            >
                 {Object.values(appLibrary).map((app) => (
                     <Tooltip key={app.id}>
                         {app.id === "Bin" && (
@@ -31,20 +48,31 @@ export default function Dock() {
                                         openApp(app.id as AppId);
                                     }
                                 }}
-                                    className="relative w-16 h-16">
+                                    className="relative transition-transform duration-200 hover:scale-110"
+                                    // style={{
+                                    //     width: iconSize,
+                                    //     height: iconSize,
+                                    // }}
+                                >
                                     <Image
                                         src={app.icon}
                                         alt={app.name}
-                                        width={64}
-                                        height={64}
-                                        className="rounded-md"
+                                        width={iconSize}
+                                        height={iconSize}
+                                        className="rounded-md border border-red-600"
                                     />
                                 </div>
                             </TooltipTrigger>
                             <TooltipContent>{app.name}</TooltipContent>
                             {/* Active Dot */}
                             {isAppActive(app.id) && (
-                                <span className="w-1.5 h-1.5 bg-white rounded-full mt-1" />
+                                <span
+                                    className="rounded-full transition-all duration-200"
+                                    style={{
+                                        width: Math.max(iconSize * 0.08, 4),
+                                        height: Math.max(iconSize * 0.08, 4),
+                                        backgroundColor: "white",
+                                    }} />
                             )}
                         </div>
                     </Tooltip>

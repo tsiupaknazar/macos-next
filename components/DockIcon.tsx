@@ -24,7 +24,6 @@ export default function DockIcon({
         const iconCenter = rect.left + rect.width / 2;
         const distance = Math.abs(mouseX - iconCenter);
 
-        // Сильне збільшення при близькості
         const maxDistance = 100;
         const scaleFactor = 1.8;
         const proximity = Math.max(0, (maxDistance - distance) / maxDistance);

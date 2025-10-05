@@ -3,6 +3,7 @@
 import { useWindowStore, WindowData } from "@/store/windowStore";
 import { Rnd } from "react-rnd"
 import { appComponents } from "@/lib/appComponents";
+// import { useThemeStore } from "@/store/themeStore";
 
 export default function WindowWrapper(props: WindowData) {
     const { id, appId, position, size, isActive, isMinimized, isFullScreen } = props;
@@ -12,6 +13,8 @@ export default function WindowWrapper(props: WindowData) {
     const focus = useWindowStore((s) => s.focusWindow);
     const updateWindow = useWindowStore((s) => s.updateWindow);
     const fullScreen = useWindowStore((s) => s.fullScreen);
+
+    // const { theme } = useThemeStore();
 
     if (isMinimized) return null;
 
@@ -49,10 +52,10 @@ export default function WindowWrapper(props: WindowData) {
                     position,
                 });
             }}
-            className={`rounded-md bg-white border cursor-default border-gray-300 shadow-xl overflow-hidden absolute transition-all duration-150 ${isFullScreen && "z-[100]"} ${isActive ? "z-50" : "z-40 opacity-80"}`}
+            className={`rounded-md bg-white dark:bg-neutral-900 dark:text-white border cursor-default border-gray-300 dark:border-gray-500 shadow-xl overflow-hidden absolute transition-all duration-150 ${isFullScreen && "z-[100]"} ${isActive ? "z-50" : "z-40 opacity-80"}`}
         >
             {/* Header */}
-            <div className="flex justify-between items-center px-3 py-2 bg-gray-100 z-50">
+            <div className="flex justify-between items-center px-3 py-2 bg-gray-100 dark:bg-neutral-900 z-50">
                 <div className="flex gap-2">
                     <button
                         onClick={() => close(id)}
@@ -67,12 +70,12 @@ export default function WindowWrapper(props: WindowData) {
                         className="w-3 h-3 bg-green-500 rounded-full"
                     />
                 </div>
-                <span className="text-xs text-gray-600">{appId}</span>
+                <span className="text-xs text-gray-600 dark:text-white">{appId}</span>
                 <div className="w-6" />
             </div>
 
             {/* Content */}
-            <div className="text-sm text-gray-500">
+            <div className="text-sm text-gray-500 bg-white">
                 {AppComponent ? <AppComponent /> : `Порожнє вікно: ${appId}`}
             </div>
         </Rnd>

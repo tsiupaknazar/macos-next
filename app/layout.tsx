@@ -6,6 +6,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ClientWrapper from "@/components/ClientWrapper";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { ThemeInitializer } from "@/components/ThemeInitializer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,20 +33,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased cursor-default`}
       >
-        <SidebarProvider>
-          <ClientWrapper>
-            {children}
-          </ClientWrapper>
-        </SidebarProvider>
-        <div className="flex lg:hidden md:block items-center justify-center min-h-screen bg-gray-900 text-white text-center p-6">
-          <div className="max-w-md">
-            <h1 className="text-2xl font-bold mb-4">Desktop Only</h1>
-            <p className="text-lg">
-              This app is only available on desktop screens.
-              Please open it on a larger device.
-            </p>
-          </div>
-        </div>
+          <SidebarProvider>
+            <ClientWrapper>
+              <ThemeInitializer />
+              {children}
+            </ClientWrapper>
+          </SidebarProvider>
       </body>
     </html>
   );

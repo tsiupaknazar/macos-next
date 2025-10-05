@@ -2,13 +2,12 @@ import { useWallpaperStore } from "@/store/wallpaperStore"
 
 import { wallpapers } from "@/data/wallpapers";
 
-
 export default function WallpaperTab() {
     const { setWallpaper } = useWallpaperStore();
 
     return (
         <div>
-            <h4 className="text-md">Choose a new wallpaper by click on image</h4>
+            <h4 className="text-md mb-2">Choose a new wallpaper by click on image</h4>
             <div className="border border-red-600 flex flex-wrap overflow-scroll justify-between object-cover gap-2 p-4 h-96">
                 {wallpapers.map((url, i) => (
                     <span
