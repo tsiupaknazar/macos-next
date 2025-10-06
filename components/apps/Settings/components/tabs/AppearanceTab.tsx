@@ -76,7 +76,7 @@ export default function AppearanceTab() {
                 <div className="flex gap-2">
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button variant="outline" size="sm">
+                            <Button variant="default" size="sm">
                                 {sidebarIconSize.charAt(0).toUpperCase() + sidebarIconSize.slice(1)}
                             </Button>
                         </DropdownMenuTrigger>

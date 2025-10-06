@@ -3,10 +3,9 @@
 import { useWindowStore, WindowData } from "@/store/windowStore";
 import { Rnd } from "react-rnd"
 import { appComponents } from "@/lib/appComponents";
-// import { useThemeStore } from "@/store/themeStore";
 
 export default function WindowWrapper(props: WindowData) {
-    const { id, appId, position, size, isActive, isMinimized, isFullScreen } = props;
+    const { id, appId, position, size, isActive, isMinimized, isFullScreen, fixedSize } = props;
 
     const close = useWindowStore((s) => s.closeWindow);
     const minimize = useWindowStore((s) => s.minimizeWindow);
@@ -14,11 +13,10 @@ export default function WindowWrapper(props: WindowData) {
     const updateWindow = useWindowStore((s) => s.updateWindow);
     const fullScreen = useWindowStore((s) => s.fullScreen);
 
-    // const { theme } = useThemeStore();
-
     if (isMinimized) return null;
 
     const AppComponent = appComponents[appId];
+    const isFixedSizeApp = fixedSize;
 
     return (
         <Rnd
@@ -30,10 +28,10 @@ export default function WindowWrapper(props: WindowData) {
             }}
             size={isFullScreen ? { width: '100%', height: '100%' } : size}
             position={isFullScreen ? { x: 0, y: 0 } : position}
-            enableResizing={!isFullScreen}
+            enableResizing={!isFixedSizeApp && !isFullScreen}
             disableDragging={isFullScreen}
             bounds="parent"
-            minWidth={300}
+            minWidth={100}
             minHeight={200}
             onDragStart={() => focus(id)}
             onDragStop={(e, d) => {

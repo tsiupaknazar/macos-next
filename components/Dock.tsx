@@ -49,17 +49,13 @@ export default function Dock() {
                                     }
                                 }}
                                     className="relative transition-transform duration-200 hover:scale-110"
-                                    // style={{
-                                    //     width: iconSize,
-                                    //     height: iconSize,
-                                    // }}
                                 >
                                     <Image
                                         src={app.icon}
                                         alt={app.name}
                                         width={iconSize}
                                         height={iconSize}
-                                        className="rounded-md border border-red-600"
+                                        className="rounded-md"
                                     />
                                 </div>
                             </TooltipTrigger>

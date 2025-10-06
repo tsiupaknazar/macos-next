@@ -8,6 +8,8 @@ import ClientWrapper from "@/components/ClientWrapper";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { ThemeInitializer } from "@/components/ThemeInitializer";
 
+import { useDisplayStore } from "@/store/displayStore";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -28,17 +30,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { brightness } = useDisplayStore();
   return (
     <html suppressHydrationWarning lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased cursor-default`}
+        style={{ filter: `brightness(${brightness}%` }}
       >
-          <SidebarProvider>
-            <ClientWrapper>
-              <ThemeInitializer />
-              {children}
-            </ClientWrapper>
-          </SidebarProvider>
+        <SidebarProvider>
+          <ClientWrapper>
+            <ThemeInitializer />
+            {children}
+          </ClientWrapper>
+        </SidebarProvider>
       </body>
     </html>
   );

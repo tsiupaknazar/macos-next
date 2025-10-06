@@ -1,9 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { Wallpaper, Bell, Eye } from "lucide-react"
+import { Wallpaper, Sun, Eye } from "lucide-react"
 import { cn } from "@/lib/utils"
-// import ThemeTab from "./tabs/ThemeTab"
+import DisplayTab from "./tabs/DisplayTab"
 import WallpaperTab from "./tabs/WallpaperTab"
 import AppearanceTab from "./tabs/AppearanceTab"
 import { useAppearanceStore } from "@/store/appearanceStore"
@@ -11,8 +11,8 @@ import { useAppearanceStore } from "@/store/appearanceStore"
 const items = [
     // { title: "Theme", icon: SunMoon },
     { title: "Wallpaper", icon: Wallpaper },
-    { title: "Notifications", icon: Bell },
     { title: "Appearance", icon: Eye },
+    { title: "Display", icon: Sun },
 ]
 
 const iconSizeMap = {
@@ -33,8 +33,8 @@ export default function SettingsWindow() {
                 return <AppearanceTab />
             case "Wallpaper":
                 return <WallpaperTab />
-            case "Notifications":
-                return <div>Notifications Content</div>
+            case "Display":
+                return <DisplayTab />
             default:
                 return null
         }
@@ -43,12 +43,12 @@ export default function SettingsWindow() {
     return (
         <div
             className={cn(
-                "flex h-full min-h-screen transition-colors duration-300",
+                "flex h-screen transition-colors duration-300",
                 isDark ? "bg-neutral-900 text-gray-100" : "bg-gray-50 text-gray-900"
             )}>
             <aside
                 className={cn(
-                    "w-40 border-r transition-all duration-300 backdrop-blur-md",
+                    "w-40 flex-none h-screen border-r transition-all duration-300 backdrop-blur-md",
                     isDark
                         ? "border-neutral-700 bg-neutral-900/60"
                         : "border-gray-200 bg-white/70"
