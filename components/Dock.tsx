@@ -11,8 +11,10 @@ export default function Dock() {
 
     const isAppActive = (appId: string) =>
         windows.some((w) => w.appId === appId && !w.isMinimized);
-    const isFocused = (appId: string) =>
-        windows.some((w) => w.appId === appId && w.isActive);
+    const isMinimized = (appId: string) => 
+        windows.some((w) => w.appId === appId && w.isMinimized);
+    // const isFocused = (appId: string) =>
+    //     windows.some((w) => w.appId === appId && w.isActive);
 
     const iconSize = dockSize; // direct mapping (e.g. 48–128)
     const dockHeight = iconSize + 24; // background height based on icon size
@@ -60,8 +62,7 @@ export default function Dock() {
                                 </div>
                             </TooltipTrigger>
                             <TooltipContent>{app.name}</TooltipContent>
-                            {/* Active Dot */}
-                            {isAppActive(app.id) && (
+                            {(isMinimized(app.id) || isAppActive(app.id)) && (
                                 <span
                                     className="rounded-full transition-all duration-200"
                                     style={{

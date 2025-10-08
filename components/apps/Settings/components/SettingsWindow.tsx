@@ -1,18 +1,19 @@
 "use client"
 
 import { useState } from "react"
-import { Wallpaper, Sun, Eye } from "lucide-react"
+import { Wallpaper, Sun, Eye, Languages } from "lucide-react"
 import { cn } from "@/lib/utils"
 import DisplayTab from "./tabs/DisplayTab"
 import WallpaperTab from "./tabs/WallpaperTab"
 import AppearanceTab from "./tabs/AppearanceTab"
 import { useAppearanceStore } from "@/store/appearanceStore"
+import { LanguagesTab } from "./tabs/LanguagesTab"
 
 const items = [
-    // { title: "Theme", icon: SunMoon },
     { title: "Wallpaper", icon: Wallpaper },
     { title: "Appearance", icon: Eye },
     { title: "Display", icon: Sun },
+    { title: "Language", icon: Languages },
 ]
 
 const iconSizeMap = {
@@ -35,6 +36,8 @@ export default function SettingsWindow() {
                 return <WallpaperTab />
             case "Display":
                 return <DisplayTab />
+            case "Languages":
+                return <LanguagesTab />
             default:
                 return null
         }
@@ -43,7 +46,7 @@ export default function SettingsWindow() {
     return (
         <div
             className={cn(
-                "flex h-screen transition-colors duration-300",
+                "flex h-screen transition-colors duration-300 no-scrollbar",
                 isDark ? "bg-neutral-900 text-gray-100" : "bg-gray-50 text-gray-900"
             )}>
             <aside
@@ -98,7 +101,7 @@ export default function SettingsWindow() {
             {/* Main Content */}
             <main
                 className={cn(
-                    "flex-1 overflow-auto transition-colors duration-300",
+                    "flex-1 overflow-auto no-scrollbar transition-colors duration-300",
                     isDark ? "bg-neutral-950/40" : "bg-white/70"
                 )}
             >

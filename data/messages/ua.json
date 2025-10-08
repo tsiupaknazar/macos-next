@@ -1,0 +1,52 @@
+{
+    "Limiter": {
+        "title": "Тільки великі екрани",
+        "description": "Будь ласка, змініть розмір екрануб щоб використовувати додаток"
+    },
+    "Menu": {
+        "apple": "Меню Apple",
+        "about": "Про цей Mac",
+        "systemSettings": "Системні налаштування...",
+        "appStore": "App Store...",
+        "recentItems": "Нещодавні елементи",
+        "forceQuit": "Примусово завершити...",
+        "sleep": "Сон",
+        "restart": "Перезапустити...",
+        "shutDown": "Вимкнути...",
+        "logOut": "Вийти з облікового запису {{user}}"
+    },
+    "Finder": {
+        "file": "Файл",
+        "edit": "Правка",
+        "view": "Вигляд",
+        "go": "Перейти",
+        "window": "Вікно",
+        "help": "Довідка",
+        "newFolder": "Нова папка",
+        "newWindow": "Нове вікно Finder",
+        "closeWindow": "Закрити вікно",
+        "emptyTrash": "Спорожнити кошик",
+        "preferences": "Налаштування..."
+    },
+    "Dock": {
+        "trash": "Кошик",
+        "downloads": "Завантаження",
+        "launchpad": "Launchpad",
+        "finder": "Finder",
+        "systemSettings": "Системні налаштування"
+    },
+    "Dialogs": {
+        "delete": "Ви впевнені, що хочете видалити цей файл?",
+        "ok": "OK",
+        "cancel": "Скасувати",
+        "save": "Зберегти",
+        "dontSave": "Не зберігати"
+    },
+    "System": {
+        "batteryLow": "Низький рівень заряду батареї",
+        "updateAvailable": "Доступне нове оновлення macOS.",
+        "connectWifi": "Підключіться до Wi-Fi",
+        "search": "Пошук",
+        "loading": "Завантаження..."
+    }
+}

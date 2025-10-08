@@ -52,21 +52,38 @@ export default function WindowWrapper(props: WindowData) {
             }}
             className={`rounded-md bg-white dark:bg-neutral-900 dark:text-white border cursor-default border-gray-300 dark:border-gray-500 shadow-xl overflow-hidden absolute transition-all duration-150 ${isFullScreen && "z-[100]"} ${isActive ? "z-50" : "z-40 opacity-80"}`}
         >
-            {/* Header */}
             <div className="flex justify-between items-center px-3 py-2 bg-gray-100 dark:bg-neutral-900 z-50">
-                <div className="flex gap-2">
+                <div className="flex gap-2 group">
                     <button
                         onClick={() => close(id)}
-                        className="w-3 h-3 bg-red-500 rounded-full hover:text-black cursor-pointer"
-                    />
+                        className="w-3 h-3 bg-red-500 rounded-full relative flex items-center justify-center"
+                    >
+                        <span className="opacity-0 group-hover:opacity-100 text-gray-800 text-[12px] font-bold leading-none">
+                            ×
+                        </span>
+                    </button>
                     <button
                         onClick={() => minimize(id)}
-                        className="w-3 h-3 bg-yellow-500 rounded-full"
-                    />
+                        className="w-3 h-3 bg-yellow-500 rounded-full relative flex items-center justify-center"
+                    >
+                        <span className="opacity-0 group-hover:opacity-100 text-gray-800 text-[12px] font-bold leading-none">
+                            -
+                        </span>
+                    </button>
                     <button
-                        onClick={() => fullScreen(id)}
-                        className="w-3 h-3 bg-green-500 rounded-full"
-                    />
+                        onClick={() => {
+                            if (!isFixedSizeApp) fullScreen(id);
+                        }}
+                        disabled={isFixedSizeApp}
+                        className={`w-3 h-3 rounded-full relative flex items-center justify-center ${isFixedSizeApp
+                            ? "bg-gray-400 cursor-not-allowed"
+                            : "bg-green-500 hover:opacity-80"
+                            }`}
+                    >
+                        <span className="opacity-0 group-hover:opacity-100 text-gray-800 text-[12px] font-bold leading-none">
+                            ⤢
+                        </span>
+                    </button>
                 </div>
                 <span className="text-xs text-gray-600 dark:text-white">{appId}</span>
                 <div className="w-6" />

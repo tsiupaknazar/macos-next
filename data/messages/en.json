@@ -1,0 +1,52 @@
+{
+    "Limiter": {
+        "title": "Desktop Only",
+        "description": "Please switch to a larger screen to use this app."
+    },
+    "Menu": {
+        "apple": "Apple Menu",
+        "about": "About This Mac",
+        "systemSettings": "System Settings...",
+        "appStore": "App Store...",
+        "recentItems": "Recent Items",
+        "forceQuit": "Force Quit...",
+        "sleep": "Sleep",
+        "restart": "Restart...",
+        "shutDown": "Shut Down...",
+        "logOut": "Log Out {{user}}"
+    },
+    "Finder": {
+        "file": "File",
+        "edit": "Edit",
+        "view": "View",
+        "go": "Go",
+        "window": "Window",
+        "help": "Help",
+        "newFolder": "New Folder",
+        "newWindow": "New Finder Window",
+        "closeWindow": "Close Window",
+        "emptyTrash": "Empty Trash",
+        "preferences": "Preferences..."
+    },
+    "Dock": {
+        "trash": "Trash",
+        "downloads": "Downloads",
+        "launchpad": "Launchpad",
+        "finder": "Finder",
+        "systemSettings": "System Settings"
+    },
+    "Dialogs": {
+        "delete": "Are you sure you want to delete this file?",
+        "ok": "OK",
+        "cancel": "Cancel",
+        "save": "Save",
+        "dontSave": "Don’t Save"
+    },
+    "System": {
+        "batteryLow": "Battery Low",
+        "updateAvailable": "A new macOS update is available.",
+        "connectWifi": "Connect to Wi-Fi",
+        "search": "Search",
+        "loading": "Loading..."
+    }
+}

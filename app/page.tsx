@@ -8,7 +8,6 @@ import LoginScreen from "@/components/screens/LoginScreen";
 import Desktop from "@/components/screens/Desktop";
 
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-
 export default function Home() {
   const status = useSystemStore((s) => s.status);
   const updateProgress = useSystemStore((s) => s.updateProgress);

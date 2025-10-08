@@ -7,8 +7,8 @@ import "./globals.css";
 import ClientWrapper from "@/components/ClientWrapper";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { ThemeInitializer } from "@/components/ThemeInitializer";
-
 import { useDisplayStore } from "@/store/displayStore";
+import { InfoModal } from "@/components/InfoModal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,12 +37,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased cursor-default`}
         style={{ filter: `brightness(${brightness}%` }}
       >
-        <SidebarProvider>
-          <ClientWrapper>
-            <ThemeInitializer />
-            {children}
-          </ClientWrapper>
-        </SidebarProvider>
+          <SidebarProvider>
+            <ClientWrapper>
+              <ThemeInitializer />
+              <InfoModal />
+              {children}
+            </ClientWrapper>
+          </SidebarProvider>
       </body>
     </html>
   );

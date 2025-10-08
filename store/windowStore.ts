@@ -23,6 +23,7 @@ type WindowState = {
   focusWindow: (id: string) => void;
   updateWindow: (id: string, changes: Partial<WindowData>) => void;
   fullScreen: (id: string) => void;
+  showMinimizedWindows: (id: string) => void;
 };
 
 export const useWindowStore = create<WindowState>()(
@@ -34,6 +35,30 @@ export const useWindowStore = create<WindowState>()(
 
       openWindow: (appId) =>
         set((state) => {
+          const existingWindow = state.windows.find((w) => w.appId === appId);
+
+          // 1️⃣ If window already exists and is minimized → restore it
+          if (existingWindow && existingWindow.isMinimized) {
+            return {
+              windows: state.windows.map((w) =>
+                w.id === existingWindow.id
+                  ? { ...w, isMinimized: false, isActive: true }
+                  : { ...w, isActive: false }
+              ),
+            };
+          }
+
+          // 2️⃣ If window already exists and is not minimized → just focus it
+          if (existingWindow && !existingWindow.isMinimized) {
+            return {
+              windows: state.windows.map((w) => ({
+                ...w,
+                isActive: w.id === existingWindow.id,
+              })),
+            };
+          }
+
+          // 3️⃣ Otherwise → create a new window
           const appEntry = Object.values(appLibrary).find((a) => a.id === appId);
 
           const newWindow: WindowData = {
@@ -43,9 +68,7 @@ export const useWindowStore = create<WindowState>()(
             isMinimized: false,
             isFullScreen: false,
             position: { x: 100, y: 100 },
-            size: appEntry?.defaultSize
-              ? appEntry.defaultSize!
-              : { width: 600, height: 400 },
+            size: appEntry?.defaultSize ?? { width: 600, height: 400 },
             fixedSize: !!appEntry?.fixedSize,
           };
 
@@ -90,10 +113,18 @@ export const useWindowStore = create<WindowState>()(
             w.id === id ? { ...w, isFullScreen: !w.isFullScreen } : w
           ),
         })),
+      showMinimizedWindows: (id) =>
+        set((state) => ({
+          windows: state.windows.map((w) =>
+            w.id === id
+              ? { ...w, isMinimized: false, isActive: true }
+              : { ...w, isActive: false }
+          ),
+        })),
     }),
     {
-      name: "window-store", // key in localStorage
-      partialize: (state) => ({ windows: state.windows }), // only persist windows array
+      name: "window-store",
+      partialize: (state) => ({ windows: state.windows }),
     }
   )
 );

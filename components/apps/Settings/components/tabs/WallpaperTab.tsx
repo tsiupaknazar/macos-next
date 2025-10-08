@@ -7,7 +7,6 @@ export default function WallpaperTab() {
 
     return (
         <div>
-            <h4 className="text-md mb-2">Choose a new wallpaper by click on image</h4>
             <div className="flex flex-wrap overflow-scroll justify-between object-cover gap-2 p-4 h-96">
                 {wallpapers.map((url, i) => (
                     <span

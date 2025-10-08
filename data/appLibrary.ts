@@ -15,7 +15,7 @@ export const appLibrary: Record<string, AppData> = {
     name: "Settings",
     icon: "/dock/settings.png",
     fixedSize: true,
-    defaultSize: { width: 630, height: 400 }
+    defaultSize: { width: 650, height: 400 }
   },
   safari: { id: "Safari", name: "Safari", icon: "/dock/safari.png" },
   notes: { id: "Notes", name: "Notes", icon: "/dock/notes.png" },

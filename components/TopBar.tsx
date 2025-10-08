@@ -4,20 +4,29 @@ import { format } from "date-fns";
 import { Search, Wifi, Languages } from "lucide-react";
 import { useSystemStore } from "@/store/systemStore";
 
-import { Battery } from "@/components/top-bar/Battery"
+import { Battery } from "@/components/top-bar/Battery";
 import { useWindowStore } from "@/store/windowStore";
+import { useModalStore } from "@/store/modalStore";
 
 export default function TopBar() {
     const sleep = useSystemStore((s) => s.sleep);
     const restart = useSystemStore((s) => s.restart);
     const shutdown = useSystemStore((s) => s.shutdown);
     const turnOff = useSystemStore((s) => s.turnOff);
-
+    const openWindow = useWindowStore((s) => s.openWindow);
     const activeWindow = useWindowStore((s) => s.activeWindow());
+    const openInfoModal = useModalStore((s) => s.openSystemInfo)
+
+
 
     const [showAppleMenu, setShowAppleMenu] = useState(false);
     const time = format(new Date(), "HH:mm");
-    const date = format(new Date(), "d MMM")
+    const date = format(new Date(), "d MMM");
+
+    const handleMenuClick = (action: () => void) => {
+        action();
+        setShowAppleMenu(false);
+    };
 
     return (
         <div className="absolute top-0 left-0 w-full h-7 bg-black/30 text-white flex items-center px-4 text-sm backdrop-blur z-[60]">
@@ -27,15 +36,20 @@ export default function TopBar() {
                 </button>
                 {showAppleMenu && (
                     <div className="absolute bg-[#1e1e1e] border border-gray-700 shadow-lg py-2 w-48 rounded text-sm">
-                        <div className="px-4 py-1 hover:bg-gray-700 cursor-pointer">About This Mac</div>
-                        <div className="px-4 py-1 hover:bg-gray-700 cursor-pointer">System Settings</div>
+                        <div className="px-4 py-1 hover:bg-gray-700 cursor-pointer" onClick={() => handleMenuClick(() => openInfoModal())}>About This Mac</div>
+                        <div
+                            className="px-4 py-1 hover:bg-gray-700 cursor-pointer"
+                            onClick={() => handleMenuClick(() => openWindow('Settings'))}
+                        >
+                            System Settings
+                        </div>
                         <hr className="my-1 border-gray-600" />
 
-                        <div onClick={() => turnOff('sleep')} className="px-4 py-1 hover:bg-gray-700 cursor-pointer">Sleep</div>
-                        <div onClick={restart} className="px-4 py-1 hover:bg-gray-700 cursor-pointer">Restart…</div>
-                        <div onClick={shutdown} className="px-4 py-1 hover:bg-gray-700 cursor-pointer">Shut Down…</div>
+                        <div onClick={() => handleMenuClick(() => turnOff('sleep'))} className="px-4 py-1 hover:bg-gray-700 cursor-pointer">Sleep</div>
+                        <div onClick={() => handleMenuClick(() => restart())} className="px-4 py-1 hover:bg-gray-700 cursor-pointer">Restart…</div>
+                        <div onClick={() => handleMenuClick(() => shutdown())} className="px-4 py-1 hover:bg-gray-700 cursor-pointer">Shut Down…</div>
                         <hr className="my-1 border-gray-600" />
-                        <div onClick={sleep} className="px-4 py-1 hover:bg-gray-700 cursor-pointer">Log Out</div>
+                        <div onClick={() => handleMenuClick(() => sleep())} className="px-4 py-1 hover:bg-gray-700 cursor-pointer">Log Out</div>
                     </div>
 
                 )}

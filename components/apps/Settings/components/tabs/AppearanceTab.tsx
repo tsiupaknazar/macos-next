@@ -1,3 +1,4 @@
+import { CustomSlider } from "@/components/Slider";
 import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
@@ -105,6 +106,14 @@ export default function AppearanceTab() {
                         onValueChange={(val) => setDockSize(val[0])}
                         className="min-w-48"
                     />
+                    {/* <CustomSlider
+                        defaultValue={dockSize}
+                        min={20}
+                        max={80}
+                        step={4}
+                        onChange={(val) => setDockSize(val)}
+                        className="min-w-48"
+                    /> */}
 
                     {/* <span className="text-sm text-muted-foreground">Large</span> */}
                 </div>
