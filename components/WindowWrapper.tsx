@@ -85,7 +85,7 @@ export default function WindowWrapper(props: WindowData) {
                         </span>
                     </button>
                 </div>
-                <span className="text-xs text-gray-600 dark:text-white">{appId}</span>
+                {/* <span className="text-xs text-gray-600 dark:text-white">{appId}</span> */}
                 <div className="w-6" />
             </div>
 

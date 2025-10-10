@@ -22,12 +22,12 @@ export function InfoModal() {
                         </span>
                     </button>
                     <button
-                        className="w-3 h-3 bg-gray-900 rounded-full relative flex items-center justify-center"
+                        className="w-3 h-3 bg-gray-500 rounded-full relative flex items-center justify-center"
                     >
                         <span className="opacity-0 text-gray-800 text-[12px] font-bold leading-none" />
                     </button>
                     <button
-                        className="w-3 h-3 bg-gray-900 rounded-full relative flex items-center justify-center"
+                        className="w-3 h-3 bg-gray-500 rounded-full relative flex items-center justify-center"
                     >
                         <span className="opacity-0 text-gray-800 text-[12px] font-bold leading-none" />
                     </button>

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { Search, Wifi, Languages } from "lucide-react";
 import { useSystemStore } from "@/store/systemStore";
@@ -17,11 +17,18 @@ export default function TopBar() {
     const activeWindow = useWindowStore((s) => s.activeWindow());
     const openInfoModal = useModalStore((s) => s.openSystemInfo)
 
-
-
     const [showAppleMenu, setShowAppleMenu] = useState(false);
-    const time = format(new Date(), "HH:mm");
-    const date = format(new Date(), "d MMM");
+    const [date, setDate] = useState(format(new Date(), "HH:mm"));
+    const [time, setTime] = useState(format(new Date(), "d MMM"));
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTime(format(new Date(), "HH:mm"));
+            setDate(format(new Date(), "d MMM"));
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, [])
 
     const handleMenuClick = (action: () => void) => {
         action();

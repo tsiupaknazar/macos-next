@@ -1,7 +1,29 @@
-type BatteryData = {
+export type BatteryData = {
     level: number;
     charging: boolean;
 };
+
+interface BatteryManager extends EventTarget {
+    charging: boolean;
+    level: number;
+    chargingTime: number;
+    dischargingTime: number;
+    addEventListener<K extends keyof BatteryManagerEventMap>(
+        type: K,
+        listener: (this: BatteryManager, ev: BatteryManagerEventMap[K]) => void
+    ): void;
+}
+
+interface BatteryManagerEventMap {
+    levelchange: Event;
+    chargingchange: Event;
+    chargingtimechange: Event;
+    dischargingtimechange: Event;
+}
+
+interface Navigator {
+    getBattery?: () => Promise<BatteryManager>;
+}
 
 type Listener = (data: BatteryData) => void;
 
@@ -11,16 +33,18 @@ export class BatteryService {
     private interval: NodeJS.Timeout | null = null;
 
     constructor() {
-        if ("getBattery" in navigator) {
-            // navigator.getBattery().then((battery) => {
-            //     this.data = { level: battery.level, charging: battery.charging };
-            //     battery.addEventListener("levelchange", () => {
-            //         this.update({ level: battery.level });
-            //     });
-            //     battery.addEventListener("chargingchange", () => {
-            //         this.update({ charging: battery.charging });
-            //     });
-            // });
+        if (typeof navigator !== "undefined" && "getBattery" in navigator) {
+            (navigator as Navigator & { getBattery?: () => Promise<BatteryManager> })
+                .getBattery?.().then((battery: BatteryManager) => {
+                    this.data = { level: battery.level, charging: battery.charging };
+
+                    battery.addEventListener("levelchange", () => {
+                        this.update({ level: battery.level });
+                    });
+                    battery.addEventListener("chargingchange", () => {
+                        this.update({ charging: battery.charging });
+                    });
+                });
         } else {
             this.simulate();
         }

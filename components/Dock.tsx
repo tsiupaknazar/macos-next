@@ -3,21 +3,23 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { appLibrary } from "@/data/appLibrary";
 import { AppId, useWindowStore } from "@/store/windowStore";
 import { useAppearanceStore } from "@/store/appearanceStore";
+import { useLaunchpadStore } from "@/store/launchpadStore";
 
 export default function Dock() {
     const windows = useWindowStore((s) => s.windows);
     const openApp = useWindowStore((s) => s.openWindow);
     const { dockSize } = useAppearanceStore();
+    const { toggle } = useLaunchpadStore();
 
     const isAppActive = (appId: string) =>
         windows.some((w) => w.appId === appId && !w.isMinimized);
-    const isMinimized = (appId: string) => 
+    const isMinimized = (appId: string) =>
         windows.some((w) => w.appId === appId && w.isMinimized);
     // const isFocused = (appId: string) =>
     //     windows.some((w) => w.appId === appId && w.isActive);
 
-    const iconSize = dockSize; // direct mapping (e.g. 48–128)
-    const dockHeight = iconSize + 24; // background height based on icon size
+    const iconSize = dockSize;
+    const dockHeight = iconSize + 24;
     const dockPaddingX = Math.max(iconSize * 0.25, 12);
     const dockPaddingY = Math.max(iconSize * 0.15, 8);
     const borderRadius = Math.max(iconSize * 0.35, 12);
@@ -45,7 +47,7 @@ export default function Dock() {
                             <TooltipTrigger>
                                 <div onClick={() => {
                                     if (app.id === "Launchpad") {
-                                        alert("Launchpad is not implemented yet.");
+                                        toggle();
                                     } else {
                                         openApp(app.id as AppId);
                                     }

@@ -1,6 +1,7 @@
 import { useWallpaperStore } from "@/store/wallpaperStore"
 
 import { wallpapers } from "@/data/wallpapers";
+import Image from "next/image";
 
 export default function WallpaperTab() {
     const { setWallpaper } = useWallpaperStore();
@@ -13,7 +14,8 @@ export default function WallpaperTab() {
                         key={i}
                         onClick={() => setWallpaper(url)}
                     >
-                        <img src={url} alt="Wallpaper" className="h-40 w-52 rounded-lg cursor-pointer" />
+                        {/* <img src={url} alt="Wallpaper" className="h-40 w-52 rounded-lg cursor-pointer" /> */}
+                        <Image src={url} alt="Wallpaper" width={208} height={160} className="h-40 w-52 rounded-lg cursor-pointer" />
                     </span>
                 ))}
             </div>

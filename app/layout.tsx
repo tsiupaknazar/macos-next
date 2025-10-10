@@ -9,6 +9,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { ThemeInitializer } from "@/components/ThemeInitializer";
 import { useDisplayStore } from "@/store/displayStore";
 import { InfoModal } from "@/components/InfoModal";
+import LaunchpadOverlay from "@/components/LaunchpadOverlay";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,11 +20,6 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
-// export const metadata: Metadata = {
-//   title: "Mac OS",
-//   description: "Your Mac OS system, just in browser",
-// };
 
 export default function RootLayout({
   children,
@@ -41,6 +37,7 @@ export default function RootLayout({
             <ClientWrapper>
               <ThemeInitializer />
               <InfoModal />
+              <LaunchpadOverlay />
               {children}
             </ClientWrapper>
           </SidebarProvider>
