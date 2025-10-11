@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Progress } from "@/components/ui/progress"
 import ScreenWrapper from "../ScreenWrapper";
-import { useSystemStore } from "@/store/systemStore";
+import { useSystemStore } from "@/store/system/systemStore";
 
 export default function LoadingScreen() {
     const progress = useSystemStore((s) => s.loadingProgress)

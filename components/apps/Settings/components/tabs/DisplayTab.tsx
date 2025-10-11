@@ -1,6 +1,6 @@
 import { Slider } from "@/components/ui/slider";
 import { useEffect } from "react";
-import { useDisplayStore } from "@/store/displayStore";
+import { useDisplayStore } from "@/store/ui/displayStore";
 
 export default function DisplayTab() {
     const {

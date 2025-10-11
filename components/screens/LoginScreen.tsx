@@ -1,7 +1,7 @@
-import { useSystemStore } from "@/store/systemStore";
+import { useSystemStore } from "@/store/system/systemStore";
 import { useState } from "react";
 
-import { useWallpaperStore } from "@/store/wallpaperStore";
+import { useWallpaperStore } from "@/store/ui/wallpaperStore";
 
 export default function LoginScreen() {
     const login = useSystemStore((state) => state.login);

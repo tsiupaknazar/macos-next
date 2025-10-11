@@ -7,7 +7,7 @@ import "./globals.css";
 import ClientWrapper from "@/components/ClientWrapper";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { ThemeInitializer } from "@/components/ThemeInitializer";
-import { useDisplayStore } from "@/store/displayStore";
+import { useDisplayStore } from "@/store/ui/displayStore";
 import { InfoModal } from "@/components/InfoModal";
 import LaunchpadOverlay from "@/components/LaunchpadOverlay";
 

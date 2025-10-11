@@ -2,7 +2,7 @@
 "use client"
 
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
-import { useModalStore } from "@/store/modalStore"
+import { useModalStore } from "@/store/ui/modalStore"
 import { Button } from "./ui/button"
 import Link from "next/link"
 

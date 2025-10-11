@@ -2,11 +2,11 @@
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { Search, Wifi, Languages } from "lucide-react";
-import { useSystemStore } from "@/store/systemStore";
+import { useSystemStore } from "@/store/system/systemStore";
 
 import { Battery } from "@/components/top-bar/Battery";
-import { useWindowStore } from "@/store/windowStore";
-import { useModalStore } from "@/store/modalStore";
+import { useWindowStore } from "@/store/ui/windowStore";
+import { useModalStore } from "@/store/ui/modalStore";
 
 export default function TopBar() {
     const sleep = useSystemStore((s) => s.sleep);

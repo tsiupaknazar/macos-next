@@ -1,6 +1,6 @@
 "use client";
 
-import { useWindowStore, WindowData } from "@/store/windowStore";
+import { useWindowStore, WindowData } from "@/store/ui/windowStore";
 import { Rnd } from "react-rnd"
 import { appComponents } from "@/lib/appComponents";
 

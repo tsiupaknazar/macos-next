@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
-import { useAppearanceStore } from "@/store/appearanceStore";
+import { useAppearanceStore } from "@/store/ui/appearanceStore";
 
 export function ThemeInitializer() {
     const { theme, setTheme, updateSystemTheme } = useAppearanceStore()

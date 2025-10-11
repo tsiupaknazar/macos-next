@@ -1,4 +1,4 @@
-import { useSystemStore } from "@/store/systemStore";
+import { useSystemStore } from "@/store/system/systemStore";
 import ScreenWrapper from "../ScreenWrapper";
 import { Power } from "lucide-react"
 

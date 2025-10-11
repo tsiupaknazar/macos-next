@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 import DisplayTab from "./tabs/DisplayTab"
 import WallpaperTab from "./tabs/WallpaperTab"
 import AppearanceTab from "./tabs/AppearanceTab"
-import { useAppearanceStore } from "@/store/appearanceStore"
+import { useAppearanceStore } from "@/store/ui/appearanceStore"
 import { LanguagesTab } from "./tabs/LanguagesTab"
 
 const items = [

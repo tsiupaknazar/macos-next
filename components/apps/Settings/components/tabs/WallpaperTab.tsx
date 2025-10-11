@@ -1,4 +1,4 @@
-import { useWallpaperStore } from "@/store/wallpaperStore"
+import { useWallpaperStore } from "@/store/ui/wallpaperStore"
 
 import { wallpapers } from "@/data/wallpapers";
 import Image from "next/image";

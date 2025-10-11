@@ -4,8 +4,8 @@ import TopBar from "../TopBar";
 
 import WindowWrapper from "../WindowWrapper";
 
-import { useWindowStore } from "@/store/windowStore";
-import { useWallpaperStore } from "@/store/wallpaperStore";
+import { useWindowStore } from "@/store/ui/windowStore";
+import { useWallpaperStore } from "@/store/ui/wallpaperStore";
 
 export default function Desktop() {
     const windows = useWindowStore((s) => s.windows);

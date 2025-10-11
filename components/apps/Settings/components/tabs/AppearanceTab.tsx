@@ -7,7 +7,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Slider } from "@/components/ui/slider"
-import { useAppearanceStore } from "@/store/appearanceStore"
+import { useAppearanceStore } from "@/store/ui/appearanceStore"
 
 type systemMode = "dark" | "light" | "system";
 

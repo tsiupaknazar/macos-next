@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useSystemStore } from "@/store/systemStore";
+import { useSystemStore } from "@/store/system/systemStore";
 import OffScreen from "@/components/screens/OffScreen";
 import LoadingScreen from "@/components/screens/LoadingScreen";
 import LoginScreen from "@/components/screens/LoginScreen";

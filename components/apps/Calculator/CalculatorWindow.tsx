@@ -2,7 +2,7 @@ import { Calculator } from "lucide-react";
 import { CalcDisplay } from "./components/CalcDisplay";
 import { CalcButton } from "./components/CalcButton";
 
-import { useCalculatorStore } from "@/store/calculatorStore";
+import { useCalculatorStore } from "@/store/apps/calculatorStore";
 
 export default function CalculatorWindow() {
     const {
