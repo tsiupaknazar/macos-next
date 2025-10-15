@@ -10,12 +10,16 @@ interface AppearanceStore {
     isDark: boolean
     sidebarIconSize: SidebarIconSize;
     dockSize: number
+    terminalTextColor: string
+    terminalBgColor: string
 
     setTheme: (theme: Theme) => void
     setAccentColor: (color: string) => void
     updateSystemTheme: () => void
     setSidebarIconSize: (size: SidebarIconSize) => void
     setDockSize: (size: number) => void
+    setTerminalTextColor: (color: string) => void
+    setTerminalBgColor: (color: string) => void
 }
 
 export const useAppearanceStore = create<AppearanceStore>()(
@@ -29,6 +33,9 @@ export const useAppearanceStore = create<AppearanceStore>()(
                     : false,
             sidebarIconSize: "medium",
             dockSize: 72,
+            terminalTextColor: "#699111",
+            terminalBgColor: "#000",
+
 
             setTheme: (theme) => {
                 let isDark = false
@@ -57,6 +64,8 @@ export const useAppearanceStore = create<AppearanceStore>()(
             },
             setSidebarIconSize: (size) => set({ sidebarIconSize: size }),
             setDockSize: (size) => set({ dockSize: size }),
+            setTerminalTextColor: (color) => set({ terminalTextColor: color }),
+            setTerminalBgColor: (color) => set({ terminalBgColor: color }),
         }),
         { name: "theme-settings" }
     )

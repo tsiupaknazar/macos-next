@@ -46,7 +46,7 @@ export default function CalculatorWindow() {
     };
 
     return (
-        <div className="w-full dark:bg-neutral-900 text-gray-900 dark:text-white">
+        <div className="w-full h-full dark:bg-neutral-900 text-gray-900 dark:text-white">
             <CalcDisplay value={display} lastOperation={lastOperation} />
             <div className="grid grid-cols-4 gap-1 p-1 min-w-0">
                 {rows.map(row =>

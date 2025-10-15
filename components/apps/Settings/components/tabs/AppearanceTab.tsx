@@ -1,4 +1,4 @@
-import { CustomSlider } from "@/components/Slider";
+// import { CustomSlider } from "@/components/Slider";
 import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,

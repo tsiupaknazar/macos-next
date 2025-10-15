@@ -90,7 +90,7 @@ export default function WindowWrapper(props: WindowData) {
             </div>
 
             {/* Content */}
-            <div className="text-sm text-gray-500 bg-white">
+            <div className="h-full text-sm text-gray-500 bg-white">
                 {AppComponent ? <AppComponent /> : `Порожнє вікно: ${appId}`}
             </div>
         </Rnd>

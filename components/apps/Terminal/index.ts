@@ -1,0 +1,1 @@
+export { default as TerminalWindow } from "./components/TerminalWindow";

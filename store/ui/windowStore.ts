@@ -37,7 +37,6 @@ export const useWindowStore = create<WindowState>()(
         set((state) => {
           const existingWindow = state.windows.find((w) => w.appId === appId);
 
-          // 1️⃣ If window already exists and is minimized → restore it
           if (existingWindow && existingWindow.isMinimized) {
             return {
               windows: state.windows.map((w) =>
@@ -48,7 +47,6 @@ export const useWindowStore = create<WindowState>()(
             };
           }
 
-          // 2️⃣ If window already exists and is not minimized → just focus it
           if (existingWindow && !existingWindow.isMinimized) {
             return {
               windows: state.windows.map((w) => ({
